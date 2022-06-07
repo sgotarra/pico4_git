@@ -6,24 +6,19 @@ using Pvr_UnitySDKAPI;
 public class moupersonatge : MonoBehaviour {
 
 	private Transform myTransform;
-	private AudioSource source;
-	public AudioClip motor1;
-	public AudioClip motor2;
-	public AudioClip tocabola;
+
 
  	private void OnCollisionEnter(Collision collision)
 
     {
        Debug.Log("El " + gameObject.name + " colicionó con el gamobject " + collision.gameObject.name);   
-	   source.Stop();
-	   source.clip =tocabola;
-       source.Play();
+	 
     }
 
 	// Use this for initialization
 	void Start() {
 			myTransform = GetComponent<Transform>();
-			source = GetComponent<AudioSource>();	
+			
 	}
 	
 	// Update is called once per frame
@@ -48,11 +43,7 @@ public class moupersonatge : MonoBehaviour {
 			{
 			myTransform.Translate(new Vector3(0, 0,1) * spped*Time.deltaTime);
 			
-			if (!source.isPlaying)
-        		{
-				source.clip=motor1;
-       			source.Play();
-				}
+			
 			}
 		if (Input.GetKey("s")) myTransform.Translate(new Vector3(0, 0,-1) * spped*Time.deltaTime);
 		if (Input.GetKey("d")) myTransform.Rotate(Vector3.up * velocidadRotac * Time.deltaTime);
@@ -63,39 +54,23 @@ public class moupersonatge : MonoBehaviour {
 		switch (Controller.UPvr_GetTouchPadClick(0))
         	{
             case TouchPadClick.No:
-				if(source.clip!=tocabola) source.Stop();
+			
                 break;
             case TouchPadClick.ClickUp:
                 myTransform.Translate(new Vector3(0, 0, 1) * spped * Time.deltaTime);
-				if (!source.isPlaying)
-        		{
-				source.clip=motor1;
-       			source.Play();
-				}
+			
 				break;
             case TouchPadClick.ClickDown:
                 myTransform.Translate(new Vector3(0, 0, -1) * spped* Time.deltaTime);
-				if (!source.isPlaying)
-        		{
-				source.clip=motor1;
-       			source.Play();
-				}
+			
                 break;
             case TouchPadClick.ClickRight:
                 myTransform.Rotate(Vector3.up * velocidadRotac * Time.deltaTime);
-				if (!source.isPlaying)
-        		{
-				source.clip=motor2;
-       			source.Play();
-				}
+			
                 break;
             case TouchPadClick.ClickLeft:
                 myTransform.Rotate(Vector3.down * velocidadRotac * Time.deltaTime);
-				if (!source.isPlaying)
-        		{
-				source.clip=motor2;
-       			source.Play();
-				}
+			
                 break;
             default:
                 break;
